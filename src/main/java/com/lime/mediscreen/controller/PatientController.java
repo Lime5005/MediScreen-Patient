@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:8081")//it's running on 8080, but for configuring allowed origins: ui running on 8081.
 @RestController
 @RequestMapping("/api")
 public class PatientController {
@@ -57,6 +58,15 @@ public class PatientController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/patients/family")
+    public ResponseEntity<List<Patient>> getPatientsByLastName(@RequestParam(value = "lastName") String lastName) {
+        List<Patient> patients = patientService.findPatientByLastName(lastName);
+        if (patients.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(patients);
     }
 
 }
