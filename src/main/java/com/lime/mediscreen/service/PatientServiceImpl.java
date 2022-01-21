@@ -43,17 +43,18 @@ public class PatientServiceImpl implements PatientService{
     @Override
     public Patient updatePatient(Long id, Patient patientDetails) {
         Optional<Patient> optionalPatient = patientRepository.findById(id);
-        if (optionalPatient.isPresent()) {
-            Patient patient = optionalPatient.get();
-            patient.setFirstName(patientDetails.getFirstName());
-            patient.setLastName(patientDetails.getLastName());
-            patient.setBirthDate(patientDetails.getBirthDate());
-            patient.setSex(patientDetails.getSex());
-            patient.setAddress(patientDetails.getAddress());
-            patient.setPhone(patientDetails.getPhone());
-            final Patient updatedPatient = patientRepository.save(patient);
-            return updatedPatient;
-        } else return null;
+        if (!optionalPatient.isPresent()) {
+            return null;
+        }
+        Patient patient = optionalPatient.get();
+        patient.setFirstName(patientDetails.getFirstName());
+        patient.setLastName(patientDetails.getLastName());
+        patient.setBirthDate(patientDetails.getBirthDate());
+        patient.setSex(patientDetails.getSex());
+        patient.setAddress(patientDetails.getAddress());
+        patient.setPhone(patientDetails.getPhone());
+        final Patient updatedPatient = patientRepository.save(patient);
+        return updatedPatient;
     }
 
     @Override
