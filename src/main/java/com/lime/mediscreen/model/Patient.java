@@ -3,10 +3,7 @@ package com.lime.mediscreen.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Data
@@ -19,15 +16,16 @@ public class Patient {
 
     @Pattern(regexp="^[A-Za-z]*$", message = "First Name has to be text")
     @NotBlank(message = "First Name is mandatory")
-    @Size(max = 100)
+    @Size(min = 2, max = 26, message = "First Name length must be 2 to 26 characters")
     private String firstName;
 
 
     @Pattern(regexp="^[A-Za-z]*$", message = "Last Name has to be text")
     @NotBlank(message = "Last Name is mandatory")
-    @Size(max = 100)
+    @Size(min = 2, max = 26, message = "Last Name length must be 2 to 26 characters")
     private String lastName;
 
+    @Past(message = "Birthdate must be past or present")
     @NotNull(message = "Birthdate is mandatory")
     private Date birthDate;
 
