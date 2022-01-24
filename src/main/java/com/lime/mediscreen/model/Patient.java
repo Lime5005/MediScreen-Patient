@@ -17,13 +17,13 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Pattern(regexp="^[A-Za-z]*$", message = "Input has to be text")
+    @Pattern(regexp="^[A-Za-z]*$", message = "First Name has to be text")
     @NotBlank(message = "First Name is mandatory")
     @Size(max = 100)
     private String firstName;
 
 
-    @Pattern(regexp="^[A-Za-z]*$", message = "Input has to be text")
+    @Pattern(regexp="^[A-Za-z]*$", message = "Last Name has to be text")
     @NotBlank(message = "Last Name is mandatory")
     @Size(max = 100)
     private String lastName;
