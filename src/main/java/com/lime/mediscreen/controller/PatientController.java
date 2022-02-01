@@ -3,6 +3,7 @@ package com.lime.mediscreen.controller;
 import com.lime.mediscreen.exception.ResourceNotFoundException;
 import com.lime.mediscreen.model.Patient;
 import com.lime.mediscreen.service.PatientService;
+import com.lime.mediscreen.service.PatientServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,16 @@ public class PatientController {
 
     private final PatientService patientService;
 
+
     @Autowired
     public PatientController(PatientService patientService) {
         this.patientService = patientService;
+    }
+
+
+    @RequestMapping("/greeting")
+    public @ResponseBody String greeting() {
+        return patientService.greet();
     }
 
     @GetMapping("/patients")

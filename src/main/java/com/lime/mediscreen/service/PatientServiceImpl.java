@@ -11,8 +11,14 @@ import java.util.Optional;
 @Service
 public class PatientServiceImpl implements PatientService{
 
+
     @Autowired
     private PatientRepository patientRepository;
+
+    @Override
+    public String greet() {
+        return "Hello, World";
+    }
 
     @Override
     public List<Patient> findAll() {

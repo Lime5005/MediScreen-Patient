@@ -48,4 +48,12 @@ public class Patient {
         this.birthDate = birthDate;
         this.sex = sex;
     }
+
+    public Patient(Long id, String firstName, String lastName, Date birthDate, Gender sex) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.sex = sex;
+    }
 }
