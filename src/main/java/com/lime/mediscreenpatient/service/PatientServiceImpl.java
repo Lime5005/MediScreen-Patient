@@ -1,7 +1,7 @@
-package com.lime.mediscreen.service;
+package com.lime.mediscreenpatient.service;
 
-import com.lime.mediscreen.model.Patient;
-import com.lime.mediscreen.repository.PatientRepository;
+import com.lime.mediscreenpatient.model.Patient;
+import com.lime.mediscreenpatient.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,11 +34,6 @@ public class PatientServiceImpl implements PatientService{
     @Override
     public Patient savePatient(Patient patient) {
         return patientRepository.save(patient);
-    }
-
-    @Override
-    public Patient findPatientByFirstName(String firstName) {
-        return patientRepository.findPatientByFirstName(firstName);
     }
 
     @Override

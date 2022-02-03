@@ -1,9 +1,7 @@
-package com.lime.mediscreen.controller;
+package com.lime.mediscreenpatient.controller;
 
-import com.lime.mediscreen.exception.ResourceNotFoundException;
-import com.lime.mediscreen.model.Patient;
-import com.lime.mediscreen.service.PatientService;
-import com.lime.mediscreen.service.PatientServiceImpl;
+import com.lime.mediscreenpatient.model.Patient;
+import com.lime.mediscreenpatient.service.PatientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +45,10 @@ public class PatientController {
     }
 
     @GetMapping("/patients/{id}")
-    public ResponseEntity<Patient> getPatientById(@PathVariable(value = "id") Long patientId) {
+    public ResponseEntity<Object> getPatientById(@PathVariable(value = "id") Long patientId) {
         Patient patient = patientService.findPatientById(patientId);
         if (patient == null ) {
-            throw new ResourceNotFoundException("Patient Not Found With id: " + patientId);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No patient with id: " + patientId);
         }
         logger.info("Patient is queried with id: " + patientId);
         return new ResponseEntity<>(patient, HttpStatus.OK);

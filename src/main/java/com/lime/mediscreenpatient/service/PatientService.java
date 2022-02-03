@@ -1,13 +1,12 @@
-package com.lime.mediscreen.service;
+package com.lime.mediscreenpatient.service;
 
-import com.lime.mediscreen.model.Patient;
+import com.lime.mediscreenpatient.model.Patient;
 
 import java.util.List;
 
 public interface PatientService {
     String greet();
     List<Patient> findAll();
-    Patient findPatientByFirstName(String firstName);
     List<Patient> findPatientByLastName(String lastName);
     Patient findPatientById(Long id);
     Patient updatePatient(Long id, Patient patientDetails);

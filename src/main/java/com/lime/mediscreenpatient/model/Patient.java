@@ -1,4 +1,4 @@
-package com.lime.mediscreen.model;
+package com.lime.mediscreenpatient.model;
 
 import lombok.Data;
 
@@ -37,17 +37,17 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    public Patient(String firstName, String lastName, Date birthDate, Gender sex) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.sex = sex;
-    }
+//    public Patient(String firstName, String lastName) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//    }
+//
+//    public Patient(String firstName, String lastName, Date birthDate, Gender sex) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.birthDate = birthDate;
+//        this.sex = sex;
+//    }
 
     public Patient(Long id, String firstName, String lastName, Date birthDate, Gender sex) {
         this.id = id;

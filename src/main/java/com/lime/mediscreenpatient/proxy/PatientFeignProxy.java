@@ -1,6 +1,6 @@
-package com.lime.mediscreen.proxy;
+package com.lime.mediscreenpatient.proxy;
 
-import com.lime.mediscreen.model.Patient;
+import com.lime.mediscreenpatient.model.Patient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

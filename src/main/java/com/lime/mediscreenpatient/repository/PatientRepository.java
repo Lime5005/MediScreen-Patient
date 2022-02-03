@@ -1,6 +1,6 @@
-package com.lime.mediscreen.repository;
+package com.lime.mediscreenpatient.repository;
 
-import com.lime.mediscreen.model.Patient;
+import com.lime.mediscreenpatient.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

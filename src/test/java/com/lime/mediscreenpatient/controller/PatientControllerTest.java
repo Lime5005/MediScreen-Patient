@@ -1,10 +1,10 @@
-package com.lime.mediscreen.controller;
+package com.lime.mediscreenpatient.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lime.mediscreen.MediscreenApplication;
-import com.lime.mediscreen.model.Gender;
-import com.lime.mediscreen.model.Patient;
-import com.lime.mediscreen.service.PatientService;
+import com.lime.mediscreenpatient.MediscreenPatientApplication;
+import com.lime.mediscreenpatient.model.Gender;
+import com.lime.mediscreenpatient.model.Patient;
+import com.lime.mediscreenpatient.service.PatientService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 @AutoConfigureMockMvc
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.MOCK, classes={ MediscreenApplication.class })
+@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.MOCK, classes={ MediscreenPatientApplication.class })
 public class PatientControllerTest {
 
     @Autowired
@@ -88,6 +88,13 @@ public class PatientControllerTest {
     }
 
     @Test
+    public void test_Get_Null_Patient_By_Id_Should_Return_OK() throws Exception {
+        when(patientServiceMock.findPatientById(41L)).thenReturn(null);
+        mockMvc.perform(get("/api/patients/41"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
     public void test_Update_Patient_By_Id_Should_Return_OK() throws Exception {
         String getBirth = "1967-10-29";
         Date birthDate = parseDate(getBirth);
@@ -100,6 +107,20 @@ public class PatientControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.firstName").value("updatedDDD"));
+
+    }
+
+    @Test
+    public void test_Get_BindingResult_When_Input_Is_Null() throws Exception {
+        String getBirth = "1968-10-29";
+        Date birthDate = parseDate(getBirth);
+        Patient updatedPatient = new Patient(33L, "", "ddd", birthDate, Gender.M);
+        when(patientServiceMock.updatePatient(33L, updatedPatient)).thenReturn(updatedPatient);
+        mockMvc.perform(put("/api/patients/update/33")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(updatedPatient))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -147,6 +168,15 @@ public class PatientControllerTest {
                 .andExpect(jsonPath("$..*").isNotEmpty())
                 .andExpect(jsonPath("$.[0].firstName").value("vicky"))
                 .andExpect(jsonPath("$.[1].firstName").value("vivian"));
+    }
+
+    @Test
+    public void test_Get_Empty_List_Patients_Should_Return_OK() throws Exception {
+        when(patientServiceMock.findPatientByLastName("ooo")).thenReturn(new ArrayList<>());
+        mockMvc.perform(get("/api/patients/family")
+                .param("lastName", "ooo")
+                .contentType(MediaType.ALL))
+                .andExpect(status().isNoContent());
     }
 
     @Test

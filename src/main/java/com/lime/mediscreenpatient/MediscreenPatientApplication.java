@@ -1,4 +1,4 @@
-package com.lime.mediscreen;
+package com.lime.mediscreenpatient;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableFeignClients
-public class MediscreenApplication {
+public class MediscreenPatientApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MediscreenApplication.class, args);
+		SpringApplication.run(MediscreenPatientApplication.class, args);
 	}
 
 }
