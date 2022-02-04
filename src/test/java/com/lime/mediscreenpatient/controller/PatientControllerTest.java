@@ -49,13 +49,6 @@ public class PatientControllerTest {
     }
 
     @Test
-    public void greetingShouldReturnMessageFromService() throws Exception {
-        when(patientServiceMock.greet()).thenReturn("Hello, Mock");
-        this.mockMvc.perform(get("/api/greeting")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("Hello, Mock")));
-    }
-
-    @Test
     public void test_Add_Patient_Should_Return_OK()  throws Exception {
         String addBirth = "1998-10-29";
         Date birthDate = parseDate(addBirth);

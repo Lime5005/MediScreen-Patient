@@ -29,12 +29,6 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-
-    @RequestMapping("/greeting")
-    public @ResponseBody String greeting() {
-        return patientService.greet();
-    }
-
     @GetMapping("/patients")
     public ResponseEntity<List<Patient>> getAllPatients() {
         List<Patient> patients = patientService.findAll();

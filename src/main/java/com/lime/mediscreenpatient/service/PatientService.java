@@ -5,7 +5,6 @@ import com.lime.mediscreenpatient.model.Patient;
 import java.util.List;
 
 public interface PatientService {
-    String greet();
     List<Patient> findAll();
     List<Patient> findPatientByLastName(String lastName);
     Patient findPatientById(Long id);

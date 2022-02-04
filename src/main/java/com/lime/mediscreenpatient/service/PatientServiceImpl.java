@@ -16,11 +16,6 @@ public class PatientServiceImpl implements PatientService{
     private PatientRepository patientRepository;
 
     @Override
-    public String greet() {
-        return "Hello, World";
-    }
-
-    @Override
     public List<Patient> findAll() {
         return patientRepository.findAll();
     }
