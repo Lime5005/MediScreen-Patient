@@ -2,6 +2,8 @@ package com.lime.mediscreenpatient.controller;
 
 import com.lime.mediscreenpatient.model.Patient;
 import com.lime.mediscreenpatient.service.PatientService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8080")//it's running on 8081, but for configuring allowed origins: ui running on 8080.
 @RestController
+@Api(tags = "Patient's data API")
 @RequestMapping("/api")
 public class PatientController {
     Logger logger = LoggerFactory.getLogger(PatientController.class);
@@ -30,6 +33,7 @@ public class PatientController {
     }
 
     @GetMapping("/patients")
+    @ApiOperation("Get all Patients")
     public ResponseEntity<List<Patient>> getAllPatients() {
         List<Patient> patients = patientService.findAll();
         if (patients.isEmpty()) {
@@ -39,6 +43,7 @@ public class PatientController {
     }
 
     @GetMapping("/patients/{id}")
+    @ApiOperation("Find one Patient by patient's ID")
     public ResponseEntity<Object> getPatientById(@PathVariable(value = "id") Long patientId) {
         Patient patient = patientService.findPatientById(patientId);
         if (patient == null ) {
@@ -49,6 +54,7 @@ public class PatientController {
     }
 
     @PutMapping("/patients/update/{id}")
+    @ApiOperation("Update Patient's info by patient's ID")
     public ResponseEntity<Object> updatePatientById(@PathVariable(value = "id") Long patientId, @Valid @RequestBody Patient patientDetails, BindingResult result) {
         ResponseEntity<Object> messages = getBindingResultErrors(result);
         if (messages != null) return messages;
@@ -58,6 +64,7 @@ public class PatientController {
     }
 
     @PostMapping("/patient/add")
+    @ApiOperation("Create a new Patient")
     public ResponseEntity<Object> createPatient(@Valid @RequestBody Patient patient, BindingResult result) {
         ResponseEntity<Object> messages = getBindingResultErrors(result);
         if (messages != null) return messages;
@@ -67,6 +74,7 @@ public class PatientController {
     }
 
     @DeleteMapping("/patients/{id}")
+    @ApiOperation("Delete a Patient by patient's ID")
     public ResponseEntity<Object> deletePatient(@PathVariable(value = "id") Long patientId) {
         Boolean deleted = patientService.deletePatientById(patientId);
         if (!deleted) {
@@ -77,6 +85,7 @@ public class PatientController {
     }
 
     @GetMapping("/patients/family")
+    @ApiOperation("Find one Patient by patient's Lastname")
     public ResponseEntity<List<Patient>> getPatientsByLastName(@RequestParam(value = "lastName") String lastName) {
         List<Patient> patients = patientService.findPatientByLastName(lastName);
         if (patients.isEmpty()) {
